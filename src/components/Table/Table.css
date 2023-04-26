@@ -1,0 +1,11 @@
+.Button {
+    width: 100px;
+    color: #fff;
+    background-color: #B0E0E6;
+    border-color: #4682B4;
+}
+
+.edit-input {
+    width: 200px;
+    border: 1px solid #DCDCDC;
+}

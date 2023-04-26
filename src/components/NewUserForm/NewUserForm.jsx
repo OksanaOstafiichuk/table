@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './NewUserForm.css';
 
 export const NewUserForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
@@ -36,11 +37,12 @@ export const NewUserForm = ({ onSubmit }) => {
   };
 
   return (
-    <form id="form" onSubmit={handelSubmit}>
+    <form id="form" className="form" onSubmit={handelSubmit}>
       <input
         type="text"
         name="name"
         placeholder="Name"
+        className="input"
         value={name}
         onChange={handelSaveData}
       />
@@ -48,6 +50,7 @@ export const NewUserForm = ({ onSubmit }) => {
         type="email"
         name="email"
         placeholder="E-mail"
+        className="input"
         value={email}
         onChange={handelSaveData}
       />
@@ -55,11 +58,12 @@ export const NewUserForm = ({ onSubmit }) => {
         type="text"
         name="age"
         placeholder="Age"
+        className="input"
         value={age}
         onChange={handelSaveData}
       />
 
-      <button type="submit" id="button">
+      <button type="submit" id="button" className="button">
         Save
       </button>
     </form>

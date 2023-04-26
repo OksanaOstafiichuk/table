@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './Table.css';
 
 export const Table = ({ data, table, onRemove }) => {
   const [isEdit, setIsEdit] = useState(false);
@@ -55,6 +56,7 @@ export const Table = ({ data, table, onRemove }) => {
                       type="text"
                       name="name"
                       id={el.id}
+                      className="edit-input"
                       defaultValue={editedRow ? editedRow.name : el.name}
                       onChange={evt => handelChangeData(evt, el.id)}
                     />
@@ -68,6 +70,7 @@ export const Table = ({ data, table, onRemove }) => {
                       type="text"
                       name="email"
                       id={el.id}
+                      className="edit-input"
                       defaultValue={editedRow ? editedRow.email : el.email}
                       onChange={evt => handelChangeData(evt, el.id)}
                     />
@@ -81,6 +84,7 @@ export const Table = ({ data, table, onRemove }) => {
                       type="text"
                       name="age"
                       id={el.id}
+                      className="edit-input"
                       defaultValue={editedRow ? editedRow.age : el.age}
                       onChange={evt => handelChangeData(evt, el.id)}
                     />
@@ -90,15 +94,27 @@ export const Table = ({ data, table, onRemove }) => {
                 </td>
                 <td>
                   {isEdit && rowId === el.id ? (
-                    <button type="button" onClick={() => handelSave(el.id)}>
+                    <button
+                      type="button"
+                      className="Button"
+                      onClick={() => handelSave(el.id)}
+                    >
                       save
                     </button>
                   ) : (
-                    <button type="button" onClick={() => handelEdit(el.id)}>
+                    <button
+                      type="button"
+                      className="Button"
+                      onClick={() => handelEdit(el.id)}
+                    >
                       edit
                     </button>
                   )}
-                  <button type="button" onClick={() => onRemove(el.id)}>
+                  <button
+                    type="button"
+                    className="Button"
+                    onClick={() => onRemove(el.id)}
+                  >
                     delete
                   </button>
                 </td>

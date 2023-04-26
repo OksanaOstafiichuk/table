@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
 import { NewUserForm } from './NewUserForm/NewUserForm';
 import { Table } from './Table/Table';
+import './App.css';
 
 const fieldArray = [
   { field: 'id', fieldName: 'ID' },
   { field: 'name', fieldName: 'NAME' },
   { field: 'email', fieldName: 'E-MAIL' },
   { field: 'age', fieldName: 'AGE' },
+  { field: 'button', fieldName: '' },
 ];
 
 export const App = () => {
@@ -56,15 +59,17 @@ export const App = () => {
   };
 
   return (
-    <div>
-      Create table
+    <div className="container">
+      <h1 className="title">Table Data</h1>
       <NewUserForm onSubmit={addUser} />
-      <button type="button" onClick={handelSortByName}>
-        Sort by name
-      </button>
-      <button type="button" onClick={handelSortByAge}>
-        Sort by age
-      </button>
+      <div className="sort">
+        <button type="button" className="sortBtn" onClick={handelSortByName}>
+          Sort by name
+        </button>
+        <button type="button" className="sortBtn" onClick={handelSortByAge}>
+          Sort by age
+        </button>
+      </div>
       <Table data={dataTable} table={fieldArray} onRemove={handelRemove} />
     </div>
   );

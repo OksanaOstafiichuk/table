@@ -1,0 +1,15 @@
+.container{
+    margin: 50px auto;
+}
+
+.title{margin-left: 50px;
+    font-size: 52px;}
+
+    .sort{margin: 0 5px 0 20px;}
+    
+    .sortBtn {
+        margin: 0;
+        border-radius: 0;
+        border: 2px solid #058;
+        font-weight: 600;
+    }
