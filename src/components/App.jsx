@@ -3,6 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { NewUserForm } from './NewUserForm/NewUserForm';
 import { Table } from './Table/Table';
 
+const fieldArray = [
+  { field: 'id', fieldName: 'ID' },
+  { field: 'name', fieldName: 'NAME' },
+  { field: 'email', fieldName: 'E-MAIL' },
+  { field: 'age', fieldName: 'AGE' },
+];
+
 export const App = () => {
   const [dataTable, setDataTable] = useState([]);
   const [btnSort, setBtnSort] = useState(false);
@@ -40,6 +47,14 @@ export const App = () => {
     }
   };
 
+  const handelRemove = id => {
+    setDataTable(prevState =>
+      dataTable.filter(el => {
+        return el.id !== id;
+      })
+    );
+  };
+
   return (
     <div>
       Create table
@@ -50,7 +65,7 @@ export const App = () => {
       <button type="button" onClick={handelSortByAge}>
         Sort by age
       </button>
-      <Table data={dataTable} />
+      <Table data={dataTable} table={fieldArray} onRemove={handelRemove} />
     </div>
   );
 };

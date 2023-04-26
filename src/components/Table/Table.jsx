@@ -1,13 +1,6 @@
 import { useState } from 'react';
 
-const fieldArray = [
-  { field: 'id', fieldName: 'ID' },
-  { field: 'name', fieldName: 'NAME' },
-  { field: 'email', fieldName: 'E-MAIL' },
-  { field: 'age', fieldName: 'AGE' },
-];
-
-export const Table = ({ data }) => {
+export const Table = ({ data, table, onRemove }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [rowId, setRowId] = useState(undefined);
   const [editedRow, setEditedRow] = useState();
@@ -46,7 +39,7 @@ export const Table = ({ data }) => {
       <table>
         <thead>
           <tr>
-            {fieldArray.map(el => {
+            {table.map(el => {
               return <th key={el.field}>{el.fieldName}</th>;
             })}
           </tr>
@@ -105,7 +98,9 @@ export const Table = ({ data }) => {
                       edit
                     </button>
                   )}
-                  <button type="button">delete</button>
+                  <button type="button" onClick={() => onRemove(el.id)}>
+                    delete
+                  </button>
                 </td>
               </tr>
             );
