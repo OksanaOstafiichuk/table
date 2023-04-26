@@ -8,22 +8,37 @@ const fieldArray = [
 ];
 
 export const Table = ({ data }) => {
-  const [editName, setEditName] = useState(false);
-  const [ediEmail, setEditEmail] = useState(false);
-  const [ediAge, setEditAge] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [rowId, setRowId] = useState(undefined);
+  const [editedRow, setEditedRow] = useState();
 
-  const handelEdit = (e, id) => {
-    console.log('click');
-    console.log(id);
-    console.log(e.target.element);
-
-    setEditName(true);
+  const handelEdit = id => {
+    setIsEdit(true);
+    setEditedRow(undefined);
+    setRowId(id);
   };
 
-  const handelChangeData = evt => {
+  const handelChangeData = (evt, id) => {
     const { name, value } = evt.currentTarget;
-    console.log(value);
-    console.log(name);
+    setEditedRow({
+      id: id,
+      [name]: value,
+    });
+  };
+
+  const handelSave = () => {
+    setIsEdit(false);
+
+    data.map(element => {
+      if (element.id === editedRow.id) {
+        if (editedRow.name) element.name = editedRow.name;
+        if (editedRow.email) element.email = editedRow.email;
+        if (editedRow.age) element.age = editedRow.age;
+      }
+      return element;
+    });
+
+    setEditedRow(undefined);
   };
 
   return (
@@ -41,20 +56,57 @@ export const Table = ({ data }) => {
             return (
               <tr key={el.id}>
                 <td>{el.id}</td>
-                <td onClick={e => handelEdit(e, el.id)}>
-                  {editName ? (
+                <td>
+                  {isEdit && rowId === el.id ? (
                     <input
                       type="text"
                       name="name"
                       id={el.id}
-                      onChange={handelChangeData}
+                      defaultValue={editedRow ? editedRow.name : el.name}
+                      onChange={evt => handelChangeData(evt, el.id)}
                     />
                   ) : (
                     el.name
                   )}
                 </td>
-                <td>{el.email}</td>
-                <td>{el.age}</td>
+                <td>
+                  {isEdit && rowId === el.id ? (
+                    <input
+                      type="text"
+                      name="email"
+                      id={el.id}
+                      defaultValue={editedRow ? editedRow.email : el.email}
+                      onChange={evt => handelChangeData(evt, el.id)}
+                    />
+                  ) : (
+                    el.email
+                  )}
+                </td>
+                <td>
+                  {isEdit && rowId === el.id ? (
+                    <input
+                      type="text"
+                      name="age"
+                      id={el.id}
+                      defaultValue={editedRow ? editedRow.age : el.age}
+                      onChange={evt => handelChangeData(evt, el.id)}
+                    />
+                  ) : (
+                    el.age
+                  )}
+                </td>
+                <td>
+                  {isEdit && rowId === el.id ? (
+                    <button type="button" onClick={() => handelSave(el.id)}>
+                      save
+                    </button>
+                  ) : (
+                    <button type="button" onClick={() => handelEdit(el.id)}>
+                      edit
+                    </button>
+                  )}
+                  <button type="button">delete</button>
+                </td>
               </tr>
             );
           })}
